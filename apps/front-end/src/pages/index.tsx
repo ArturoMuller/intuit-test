@@ -21,7 +21,6 @@ export function Index() {
               Welcome front-end 👋
             </h1>
           </div>
-
           <div id="hero" className="rounded">
             <div className="text-container">
               <h2>
