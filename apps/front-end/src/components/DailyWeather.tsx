@@ -6,10 +6,24 @@ import { map } from 'rxjs';
 // export interface CitiesProps {
 //   cityId: id
 // }
-
+type WeatherState = {
+  id: number;
+  day: string;
+  temperature: string;
+  pressure: string;
+  humidity: string;
+  wind: string;
+};
 export function DailyWeather(props: { cityId: string }) {
   const { cityId } = props;
-  const [weather, setWeather] = useState<{ id?: number, day?: string, temperature?: string, pressure?: string, humidity?: string, wind?: string }>({ });
+  const [weather, setWeather] = useState<WeatherState>({
+    id: 1,
+    day: '',
+    temperature: '',
+    pressure: '',
+    humidity: '',
+    wind: ''
+  });
 
 
   useEffect(() => {
