@@ -1,9 +1,9 @@
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 
-import { AppController } from './app/app.controller';
-import { AppService } from './app/app.service';
-import { UsersModule } from './User/user.module';
+import { CitiesController } from './cities/cities.controller';
+import { CitiesService } from './cities/cities.service';
+import { EntitiesModule } from './entities/entities.module';
 
 @Module({
   imports: [
@@ -18,9 +18,9 @@ import { UsersModule } from './User/user.module';
       autoLoadEntities: true, // To discover
       synchronize: true, //Todo: not for prod
     }),
-    UsersModule
+    EntitiesModule
   ],
-  controllers: [AppController],
-  providers: [AppService],
+  controllers: [CitiesController],
+  providers: [CitiesService],
 })
 export class AppModule {}

@@ -1,5 +1,6 @@
 {
   "name": "front-end",
+  "proxy": "http://localhost:3000",
   "$schema": "../../node_modules/nx/schemas/project-schema.json",
   "sourceRoot": "apps/front-end",
   "projectType": "application",
