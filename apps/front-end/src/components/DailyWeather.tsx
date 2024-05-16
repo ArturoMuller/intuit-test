@@ -8,33 +8,47 @@ import { map } from 'rxjs';
 // }
 
 export function DailyWeather(props: { cityId: string }) {
-  const [selectedValue, setSelectedValue] = useState('');
+  const { cityId } = props;
+  const [weather, setWeather] = useState<{ id?: number, day?: string, temperature?: string, pressure?: string, humidity?: string, wind?: string }>({ });
+
 
   useEffect(() => {
     const fetchData = async () => {
-      const response = await fetch('http://localhost:3000/api/cities')
-      const cities = await response.json()
-      setCity(cities);
+      const response = await fetch(`http://localhost:3000/api/cities/${cityId}/daily-weather`)
+      const weather = await response.json()
+      setWeather(weather);
     }
     fetchData();
-  }, []);
-  const handleChange = (event: { target: { value: SetStateAction<string>; }; }) => {
-    setSelectedValue(event.target.value);
-  };
+  }, [cityId]);
+
 
   return (
-    <>
-      {/*{cities}*/}
-      <select value={selectedValue} onChange={handleChange}>
-        {
-          cities.map((city, index) => (
-            <option key={index} value={city.id}>{city.name}</option>
-          ))
-        }
-        <option value="">Select an option...</option>
-      </select>
-    </>
-      );
-      }
+    <div style={{
+      display: 'flex',
+      flexDirection: 'row',
+      alignItems: 'center',
+      justifyContent: 'space-around',
+      padding: '10px',
+      border: '1px solid #ccc',
+      borderRadius: '5px'
+    }}>
+      <div>
+        <strong>Date:</strong> {weather.day}
+      </div>
+      <div>
+        <strong>Temperature:</strong> {weather.temperature}°C
+      </div>
+      <div>
+        <strong>Pressure:</strong> {weather.pressure} hPa
+      </div>
+      <div>
+        <strong>Humidity:</strong> {weather.humidity}%
+      </div>
+      <div>
+        <strong>Wind:</strong> {weather.wind} m/s
+      </div>
+    </div>
+  );
+}
 
-      export default Cities;
+export default DailyWeather;

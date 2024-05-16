@@ -6,7 +6,7 @@ export class Weather {
   @PrimaryGeneratedColumn()
   id: number;
 
-  @ManyToOne(() => Cities, (city) => city.weather)
+  @ManyToOne(() => Cities)
   city: Cities;
 
   @Column({ type: 'date'})

@@ -1,12 +1,13 @@
 import { SetStateAction, useEffect, useState } from 'react';
 import { map } from 'rxjs';
+import DailyWeather from './DailyWeather';
 
 
 /* eslint-disable-next-line */
 export interface CitiesProps {}
 
 export function Cities(props: CitiesProps) {
-  const [selectedValue, setSelectedValue] = useState('');
+  const [selectedCity, setSelectedCity] = useState('');
   const [cities, setCity] = useState<{id: string, name:string}[]>([]);
 
   useEffect(() => {
@@ -18,13 +19,13 @@ export function Cities(props: CitiesProps) {
     fetchData();
   }, []);
   const handleChange = (event: { target: { value: SetStateAction<string>; }; }) => {
-    setSelectedValue(event.target.value);
+    setSelectedCity(event.target.value);
   };
 
   return (
     <>
       {/*{cities}*/}
-      <select value={selectedValue} onChange={handleChange}>
+      <select value={selectedCity} onChange={handleChange}>
         {
           cities.map((city, index) => (
             <option key={index} value={city.id}>{city.name}</option>
@@ -32,6 +33,8 @@ export function Cities(props: CitiesProps) {
         }
         <option value="">Select an option...</option>
       </select>
+      <br/>
+      {selectedCity && (<DailyWeather cityId={selectedCity}/>)}
     </>
       );
       }

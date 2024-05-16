@@ -20,12 +20,10 @@ export class CitiesService {
     return await this.cities.find();
   }
 
-  async getTodaysWeather(id: string): Promise<WeatherDto> {
-    return await this.weather.find({
-      where: {
-          city: id
-        }
-      }
-    )
+  async getTodaysWeather(cityId: number): Promise<WeatherDto> {
+    return await this.weather.findOne({
+      where: { city: { id: cityId } },
+    });
+
   }
 }

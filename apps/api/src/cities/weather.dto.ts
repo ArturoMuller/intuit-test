@@ -1,12 +1,13 @@
 import { IsDate, IsInt, IsNumber, IsString } from 'class-validator';
 import { Column, ManyToOne } from 'typeorm';
+import { CityDto } from './cities.dto';
 export class WeatherDto {
 
   @IsInt()
   id: number;
 
-  @IsString()
-  city: string;
+  @IsInt()
+  city: CityDto;
 
   @IsDate()
   day: Date;

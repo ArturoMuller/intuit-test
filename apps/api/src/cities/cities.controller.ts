@@ -11,9 +11,9 @@ export class CitiesController {
     return this.citiesService.getCities();
   }
 
-  @Get(':id')
-  getWeather(@Param('id') id: string){
-    return this.citiesService.getCityWeatherByCityId(id);
+  @Get(':id/daily-weather')
+  getWeather(@Param('id') id: number){
+    return this.citiesService.getTodaysWeather(id);
   }
 
 }
