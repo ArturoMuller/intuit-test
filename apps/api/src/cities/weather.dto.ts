@@ -1,5 +1,4 @@
-import { IsDate, IsInt, IsNumber, IsString } from 'class-validator';
-import { Column, ManyToOne } from 'typeorm';
+import { IsDate, IsInt, IsNumber } from 'class-validator';
 import { CityDto } from './cities.dto';
 export class WeatherDto {
 
@@ -24,3 +23,4 @@ export class WeatherDto {
   @IsNumber()
   wind: number;
 }
+

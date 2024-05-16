@@ -11,9 +11,14 @@ export class CitiesController {
     return this.citiesService.getCities();
   }
 
-  @Get(':id/daily-weather')
-  getWeather(@Param('id') id: number){
-    return this.citiesService.getTodaysWeather(id);
+  @Get(':id/daily-weather/metric')
+  getWeatherMetric(@Param('id') id: number){
+    return this.citiesService.getTodaysWeatherInMetric(id);
+  }
+
+  @Get(':id/daily-weather/imperial')
+  getWeatherImperial(@Param('id') id: number){
+    return this.citiesService.getTodaysWeatherImperial(id);
   }
 
 }

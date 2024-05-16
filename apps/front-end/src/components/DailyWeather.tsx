@@ -14,6 +14,16 @@ type WeatherState = {
   humidity: string;
   wind: string;
 };
+
+enum System {
+  IMPERIAL= 'Imperial',
+  METRIC = 'Metric'
+}
+
+const systems = [
+  System.METRIC,
+  System.IMPERIAL
+]
 export function DailyWeather(props: { cityId: string }) {
   const { cityId } = props;
   const [weather, setWeather] = useState<WeatherState>({
@@ -25,16 +35,21 @@ export function DailyWeather(props: { cityId: string }) {
     wind: ''
   });
 
+  const [system, setSystem] = useState(System.METRIC)
+
 
   useEffect(() => {
     const fetchData = async () => {
-      const response = await fetch(`http://localhost:3000/api/cities/${cityId}/daily-weather`)
+      const response = await fetch(`http://localhost:3000/api/cities/${cityId}/daily-weather/metric`)
       const weather = await response.json()
       setWeather(weather);
     }
     fetchData();
   }, [cityId]);
 
+  const handleChange = (event: { target: { value: SetStateAction<string>; }; }) => {
+    setSystem(event.target.value == System.METRIC? System.METRIC: System.IMPERIAL);
+  };
 
   return (
     <div style={{
@@ -47,7 +62,14 @@ export function DailyWeather(props: { cityId: string }) {
       borderRadius: '5px'
     }}>
       <div>
-        <strong>Date:</strong> {weather.day}
+        <select>
+          {
+            systems.map(system => (<option key={system} value={system}>{system}</option>))
+          }
+        </select>
+      </div>
+      <div>
+      <strong>Date:</strong> {weather.day}
       </div>
       <div>
         <strong>Temperature:</strong> {weather.temperature}°C
